@@ -1,8 +1,8 @@
-const Route = {
+export const Route = {
   routes: [],
   timer: null,
   config: function (options) {
-    this.root = options.path;
+    this.root = options.root || '/';
     if (options.mode === 'history' && typeof history.pushState === 'function') {
       this.mode = 'history';
     } else {
@@ -39,7 +39,8 @@ const Route = {
   remove: function(param) {
     for(let i = 0; i < this.routes.length; i += 1) {
       const r = this.routes[i];
-      if (param === r.handler || param.toString() === param.path) {
+      console.log(param);
+      if (param === r.handler || param.toString() === r.path) {
         this.routes.splice(i, 1);
         return this;
       }
@@ -93,5 +94,3 @@ const Route = {
     return this;
   }
 }
-
-export default Route;

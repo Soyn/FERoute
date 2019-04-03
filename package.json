@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/Soyn/FERoute#readme",
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-jest": "^24.7.0",
     "jest": "^24.5.0"
   }
 }
