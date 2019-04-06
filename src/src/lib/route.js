@@ -39,7 +39,6 @@ export const Route = {
   remove: function(param) {
     for(let i = 0; i < this.routes.length; i += 1) {
       const r = this.routes[i];
-      console.log(param);
       if (param === r.handler || param.toString() === r.path) {
         this.routes.splice(i, 1);
         return this;
@@ -51,7 +50,7 @@ export const Route = {
     const fragement = f || this.getFragement();
     for(let i = 0; i < this.routes.length; i+= 1) {
       const r = this.routes[i];
-      const match = r.path.match(f);
+      const match = r.path.match(fragement);
       if (match) {
         r.handler.apply({}, match.slice(1));
         return this;
@@ -60,19 +59,20 @@ export const Route = {
     return this;
   },
   startTimer: function(fn, ms) {
+    const self = this;
     const internalFn = function () {
       fn();
-      this.timer = setTimeout(internalFn, ms);
+      self.timer = setTimeout(internalFn, ms);
     }
-    fn();
     this.timer = setTimeout(internalFn, ms);
   },
   listen: function () {
     let current = this.getFragement();
+    let self = this;
     const fn = function() {
-      if (current !== this.getFragement()) {
-        current = this.getFragement();
-        this.check(current);
+      if (current !== self.getFragement()) {
+        current = self.getFragement();
+        self.check(current);
       }
     };
     this.startTimer(fn, 50);
@@ -90,7 +90,7 @@ export const Route = {
     this.root = '/';
     this.routes = [];
     this.mode = null;
-    clearTimeout(this.timer);
+    this.timer = clearTimeout(this.timer);
     return this;
   }
 }
