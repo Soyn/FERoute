@@ -1,5 +1,4 @@
-import { Route } from '../src/lib/route';
-import { EXPECTED_COLOR } from 'jest-matcher-utils';
+import { Route } from '../src';
 jest.useFakeTimers();
 beforeEach(() => {
   Route.flush();
