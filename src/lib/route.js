@@ -79,8 +79,12 @@ export const Route = {
     return this;
   },
   navigate: function(path) {
+    if (!path) {
+      return ;
+    }
     if (this.mode === 'history') {
-      history.pushState(null, null, path);
+      // keep the path starts with '/' which will not change the host
+      history.pushState(null, null, path[0] !== '/' ? '/' + path : path);
     } else {
       location.href += path;
     }
